@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 16:19:02 by blax              #+#    #+#             */
-/*   Updated: 2024/01/16 20:58:23 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:01:21 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,17 @@ typedef struct s_node
 
 typedef struct s_data
 {
-    char            *str;
+    char			*str;
     char            type_quote;
     char            in_quote;
 	struct s_node	*node;
+	t_env			*env;
 }				t_data;
+
+typedef struct s_env
+{
+	char	**envp;
+	char	**paths;
+}	t_env;
 
 #endif

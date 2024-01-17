@@ -6,16 +6,18 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 10:53:36 by wnguyen           #+#    #+#             */
-/*   Updated: 2023/12/18 12:34:52 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/01/17 14:19:33 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <bits/sigaction.h>
+#include <asm-generic/signal-defs.h>
 
 void	handle_sigint(int signum)
 {
 	(void)signum;
-	g_info.ret = 130;
+	g_signal = 130;
 	ft_putstr_fd("\nminishell> ", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);

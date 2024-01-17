@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:31:10 by blax              #+#    #+#             */
-/*   Updated: 2024/01/16 20:20:31 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:20:25 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@
 # include <stdlib.h> // malloc
 # include <readline/readline.h> // readline
 # include <readline/history.h> // addhistory
-#include <sys/wait.h> //wait
+# include <sys/wait.h> //wait
 # include <stdio.h>
 # include <stdbool.h>
 # include <errno.h>
 // # include <bsd/string.h>
 // # include <stddef.h> //ft_strcmp
 
-extern int g_info;
+extern int g_signal;
 
 //builtins.c
 void	ft_echo(char **argv);
@@ -42,25 +42,25 @@ void	ft_exit(char **args);
 void	ft_export(char **args, t_list **env);
 
 // syntax_utils.c
-bool is_quote(char c);
-bool is_syntax_char(char c);
-bool is_double_symbol(t_data *data, int i, char c);
+bool	is_quote(char c);
+bool	is_syntax_char(char c);
+bool	is_double_symbol(t_data *data, int i, char c);
 
 // syntax.c
-bool check_before(t_data *data, int i);
-bool check_after(t_data *data, int i);
-void update_is_quote(t_data *data, char letter);
-void verif_syntax(t_data *data);
+bool	check_before(t_data *data, int i);
+bool	check_after(t_data *data, int i);
+void	update_is_quote(t_data *data, char letter);
+void	verif_syntax(t_data *data);
 // ----------------------------------------------------------------------
 
 // free.c
 // void free_tab_exec(t_node *node);
-void free_nodes(t_node *node);
-void free_data(t_data *data);
+void	free_nodes(t_node *node);
+void	free_data(t_data *data);
 
 // error.c
-bool ft_error(char *str);
-bool ft_error_2(char *str);
+bool	ft_error(char *str);
+bool	ft_error_2(char *str);
 
 // ------------------ Lexer --------------------
 // lexer.c
