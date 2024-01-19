@@ -6,64 +6,53 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:59:16 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/01/17 13:59:26 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/01/19 15:09:57 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*get_cd_path(char **args)
+int	cd_error(const char *message)
+{
+	ft_putstr_fd("cd: ", 2);
+	ft_putstr_fd(message, 2);
+	ft_putstr_fd("\n", 2);
+	return (1);
+}
+
+int	change_directory(const char *path, t_env *env)
+{
+	char	old_path[PATH_MAX];
+	char	new_path[PATH_MAX];
+
+	if (getcwd(old_path, PATH_MAX) == NULL)
+		return (cd_error("Error retrieving current directory"));
+	if (chdir(path) == -1)
+		return (cd_error("No such file or directory"));
+	if (getcwd(new_path, PATH_MAX) == NULL)
+		return (cd_error("Error getting new directory"));
+	update_env_var(&env, "OLDPWD", old_path);
+	update_env_var(&env, "PWD", new_path);
+	return (0);
+}
+
+int	ft_cd(char **argv, t_env *env)
 {
 	char	*path;
 
-	if (strcmp(args[1], "-") == 0)
-		path = getenv("OLDPWD");
-	else if (strcmp(args[1], "~") == 0 || strcmp(args[1], "") == 0)
-		path = getenv("HOME");
+	if (argv[1] == NULL)
+	{
+		path = get_env_var(env, "HOME");
+		if (path == NULL)
+			return (cd_error("HOME not set"));
+	}
+	else if (strcmp(argv[1], "-") == 0)
+	{
+		path = get_env_var(env, "OLDPWD");
+		if (path == NULL)
+			return (cd_error("OLDPWD not set"));
+	}
 	else
-		path = args[1];
-
-	if (!path)
-	{
-		ft_putstr_fd("cd: path not set\n", 2);
-		return (NULL);
-	}
-	return (path);
-}
-
-void	update_cd_env_vars(t_data *data, char *old_pwd)
-{
-	char	*new_pwd;
-
-	new_pwd = getcwd(NULL, 0);
-	update_env_var(&(data->env), "OLDPWD", old_pwd);
-	update_env_var(&(data->env), "PWD", new_pwd);
-	free(new_pwd);
-}
-
-void	ft_cd(char **args, t_data *data)
-{
-	char	*path;
-	char	*old_pwd;
-
-	if (!args[1] || args[2])
-	{
-		ft_putstr_fd("cd: wrong number of arguments\n", 2);
-		return ;
-	}
-
-	path = get_cd_path(args);
-	if (!path)
-		return ;
-
-	old_pwd = getcwd(NULL, 0);
-	if (!old_pwd || chdir(path) != 0)
-	{
-		ft_putstr_fd("cd: error changing directory\n", 2);
-		free(old_pwd);
-		return ;
-	}
-
-	update_cd_env_vars(data, old_pwd);
-	free(old_pwd);
+		path = argv[1];
+	return (change_directory(path, env));
 }

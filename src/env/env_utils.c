@@ -6,33 +6,48 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:58:57 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/01/17 13:59:06 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/01/19 14:39:03 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	update_env_var(t_list **env, const char *key, const char *value)
+void	update_env_var(t_env **env_head, const char *key, const char *value)
 {
-	t_list	*node;
-	char	*new_var;
-	char	*temp;
+	t_env	*current;
+	t_env	*prev;
+	t_env	*new_var;
 
-	temp = ft_strjoin(key, "=");
-	new_var = ft_strjoin(temp, value);
-	free(temp);
-
-	node = *env;
-	while (node)
+	current = *env_head;
+	prev = NULL;
+	while (current)
 	{
-		if (env_cmp(node->content, key) == 0)
+		if (strcmp(current->key, key) == 0)
 		{
-			free(node->content);
-			node->content = new_var;
+			free(current->value);
+			current->value = strdup(value);
 			return ;
 		}
-		node = node->next;
+		prev = current;
+		current = current->next;
 	}
+	new_var = malloc(sizeof(t_env));
+	new_var->key = strdup(key);
+	new_var->value = strdup(value);
+	new_var->next = NULL;
+	if (prev)
+		prev->next = new_var;
+	else
+		*env_head = new_var;
+}
 
-	ft_lstadd_back(env, ft_lstnew(new_var));
+char	*get_env_var(t_env *env, const char *key)
+{
+	while (env)
+	{
+		if (strcmp(env->key, key) == 0)
+			return (env->value);
+		env = env->next;
+	}
+	return (NULL);
 }

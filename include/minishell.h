@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:31:10 by blax              #+#    #+#             */
-/*   Updated: 2024/01/17 15:13:19 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/01/19 14:48:12 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <stdbool.h>
 # include <errno.h>
 # include <string.h>
+# include <linux/limits.h>
 
 // # include <bsd/string.h>
 // # include <stddef.h> //ft_strcmp

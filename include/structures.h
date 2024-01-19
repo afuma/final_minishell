@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 16:19:02 by blax              #+#    #+#             */
-/*   Updated: 2024/01/17 14:01:21 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/01/19 13:38:25 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,9 @@ typedef struct s_data
 
 typedef struct s_env
 {
-	char	**envp;
-	char	**paths;
+	char			*key;
+	char			*value;
+	struct s_env	*next;
 }	t_env;
 
 #endif
