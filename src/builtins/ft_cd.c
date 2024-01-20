@@ -6,53 +6,55 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:59:16 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/01/19 15:09:57 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/01/20 15:27:30 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	cd_error(const char *message)
+void	update_oldpwd(t_env *env)
 {
-	ft_putstr_fd("cd: ", 2);
-	ft_putstr_fd(message, 2);
-	ft_putstr_fd("\n", 2);
-	return (1);
+	char	*oldpwd;
+
+	oldpwd = getcwd(NULL, 0);
+	if (!oldpwd)
+		return (perror("getcwd error"));
+	update_env_var(env, "OLDPWD", oldpwd);
+	free(oldpwd);
 }
 
-int	change_directory(const char *path, t_env *env)
+void	update_pwd(t_env *env)
 {
-	char	old_path[PATH_MAX];
-	char	new_path[PATH_MAX];
+	char	*pwd;
 
-	if (getcwd(old_path, PATH_MAX) == NULL)
-		return (cd_error("Error retrieving current directory"));
-	if (chdir(path) == -1)
-		return (cd_error("No such file or directory"));
-	if (getcwd(new_path, PATH_MAX) == NULL)
-		return (cd_error("Error getting new directory"));
-	update_env_var(&env, "OLDPWD", old_path);
-	update_env_var(&env, "PWD", new_path);
-	return (0);
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
+		return (perror("getcwd error"));
+	update_env_var(env, "PWD", pwd);
+	free(pwd);
 }
 
-int	ft_cd(char **argv, t_env *env)
+void	ft_cd(t_node *node, t_env *env)
 {
 	char	*path;
 
-	if (argv[1] == NULL)
+	if (node->tab_exec[1])
+		path = node->tab_exec[1];
+	else
 	{
 		path = get_env_var(env, "HOME");
-		if (path == NULL)
-			return (cd_error("HOME not set"));
+		if (!path)
+			return (ft_putstr_fd("ft_cd: HOME not set\n", 2));
 	}
-	else if (strcmp(argv[1], "-") == 0)
+	if (strcmp(path, "-") == 0)
 	{
 		path = get_env_var(env, "OLDPWD");
-		if (path == NULL)
-			return (cd_error("OLDPWD not set"));
+		if (!path)
+			return (ft_putstr_fd("ft_cd: OLDPWD not set\n", 2));
 	}
-	else
-		path = argv[1];
-	return (change_directory(path, env));
+	update_oldpwd(env);
+	if (chdir(path) == -1)
+		return (ft_putstr_fd("ft_cd: chdir error\n", 2));
+	update_pwd(env);
 }
+

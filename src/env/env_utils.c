@@ -6,48 +6,59 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:58:57 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/01/19 14:39:03 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/01/20 15:05:32 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	update_env_var(t_env **env_head, const char *key, const char *value)
+void	add_env_var(t_env *env, const char *name, const char *content)
 {
-	t_env	*current;
-	t_env	*prev;
-	t_env	*new_var;
+	t_env_link	*new_var;
 
-	current = *env_head;
-	prev = NULL;
-	while (current)
-	{
-		if (strcmp(current->key, key) == 0)
-		{
-			free(current->value);
-			current->value = strdup(value);
-			return ;
-		}
-		prev = current;
-		current = current->next;
-	}
-	new_var = malloc(sizeof(t_env));
-	new_var->key = strdup(key);
-	new_var->value = strdup(value);
+	new_var = malloc(sizeof(t_env_link));
+	if (!new_var)
+		return (perror("malloc error"));
+	new_var->name = ft_strdup(name);
+	new_var->content = ft_strdup(content);
 	new_var->next = NULL;
-	if (prev)
-		prev->next = new_var;
+	new_var->prev = env->last;
+	if (env->last)
+		env->last->next = new_var;
 	else
-		*env_head = new_var;
+		env->first = new_var;
+	env->last = new_var;
+	env->len++;
 }
 
-char	*get_env_var(t_env *env, const char *key)
+void	update_env_var(t_env *env, const char *name, const char *content)
 {
-	while (env)
+	t_env_link	*current;
+
+	current = env->first;
+	while (current)
 	{
-		if (strcmp(env->key, key) == 0)
-			return (env->value);
-		env = env->next;
+		if (strcmp(current->name, name) == 0)
+		{
+			free(current->content);
+			current->content = ft_strdup(content);
+			return ;
+		}
+		current = current->next;
+	}
+	add_env_var(env, name, content);
+}
+
+char	*get_env_var(t_env *env, const char *name)
+{
+	t_env_link	*current;
+
+	current = env->first;
+	while (current)
+	{
+		if (strcmp(current->name, name) == 0)
+			return (current->content);
+		current = current->next;
 	}
 	return (NULL);
 }

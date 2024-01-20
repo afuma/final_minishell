@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 21:31:23 by wnguyen           #+#    #+#             */
-/*   Updated: 2023/11/12 07:25:48 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/01/20 15:11:36 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_echo(char **argv)
 
 	i = 2;
 	newline = true;
-	if (!argv || !argv[0])
+	if (!argv || !argv[1])
 	{
 		perror("ft_echo: Invalid arguments");
 		return ;

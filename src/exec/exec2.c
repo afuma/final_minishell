@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 11:14:49 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/01/20 11:25:44 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/01/20 11:48:34 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void execute_builtin(t_node *node)
 	else if (strcmp(node->tab_exec[0], "cd") == 0)
 		ft_cd(node);
 	else if (strcmp(node->tab_exec[0], "pwd") == 0)
-		ft_pwd(node);
+		ft_pwd();
 	else if (strcmp(node->tab_exec[0], "export") == 0)
 		ft_export(node);
 	else if (strcmp(node->tab_exec[0], "unset") == 0)
