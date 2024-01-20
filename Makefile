@@ -6,6 +6,7 @@ OBJ_DIR = obj/
 OBJ_TEST_DIR = obj_tests/
 
 SRC_FILES = off_main.c \
+			transform_enum.c \
 			builtins/ft_echo.c \
 			builtins/ft_env.c \
 			builtins/ft_exit.c \
@@ -14,16 +15,26 @@ SRC_FILES = off_main.c \
 			builtins/ft_export.c \
 			syntax/syntax.c \
 			syntax/syntax_utils.c \
-			parser_utils.c \
+			lexer/lexer.c \
+			lexer/lexer_token.c \
+			lexer/lexer_utils.c \
+			lexer/lexer_print.c \
+			parser/parser.c \
+			parser/parser_utils_1.c \
+			parser/parser_utils_2.c \
+			parser/parser_node.c \
+			parser/parser_get_token.c \
+			parser/parser_type_token.c \
+			parser/parser_quote.c \
+			parser/parser_print.c \
+			trim.c \
 			error.c \
 			free.c \
+			# parser.c \
 			# lexer/lexer.c \
 			# lexer/lexer_utils_1.c \
 			# lexer/lexer_utils_2.c \
 			# parser/parser.c \
-			# parser/parser_utils_1.c \
-			# parser/parser_type_token.c \
-			# parser/parser_quote.c \
 			# expander/expander.c \
 			# expander/expander_utils_1.c \
 			# expander/expander_utils_2.c \

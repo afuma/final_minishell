@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   syntax_utils.c                                     :+:      :+:    :+:   */
+/*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 20:01:20 by edesaint          #+#    #+#             */
-/*   Updated: 2024/01/17 14:58:18 by edesaint         ###   ########.fr       */
+/*   Created: 2024/01/17 09:36:42 by edesaint          #+#    #+#             */
+/*   Updated: 2024/01/17 22:22:11 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-bool is_quote(char c)
-{
-    return (c == '\'' || c == '"');
-}
-
-bool is_space(char c)
-{
-    return (c == ' ' || c == '\t'); // implementer les autres
-}
-
-bool is_syntax_char(char c)
-{
-    return (c == '|' || c == '>' || c == '<');
-}
-
-bool is_syntax(char c)
-{
-    return (is_space(c) || is_quote(c) || is_syntax_char(c));
-}
-
-bool is_double_symbol(t_data *data, int i, char c)
-{
-    return (data->str[i] == c && data->str[++i] == c);
-}
+// X 
+// ne devrais plus etre utile car on gere les doubles quotes en amont mais on peut toujours y faire reference
+// si besoin avec le type_token->rstick/lstick
+// bool is_empty_token(t_token *token)
+// {
+// 	if (!token)
+// 		return (true);
+// 	if (token && token->str[0] == '\0'
+// 		&& (token->type_str == S_QUOTE
+// 		|| token->type_str == D_QUOTE))
+// 	{
+// 		return (true);
+// 	}
+// 	return (false);
+// }

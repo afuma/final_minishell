@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enum.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blax <blax@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 16:22:37 by blax              #+#    #+#             */
-/*   Updated: 2023/12/19 16:27:00 by blax             ###   ########.fr       */
+/*   Updated: 2024/01/19 11:33:35 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ typedef enum e_ast_node_type {
     AST_REDIRECT
 } t_ast_node_type;
 
+typedef enum e_type_node {
+	N_CMD,
+	N_BUILTIN,
+	N_ERROR
+} t_type_node;
+
 typedef enum e_state {
 	T_COMMAND,
 	T_OPTION,
@@ -47,6 +53,7 @@ typedef enum e_stick_token {
 	S_QUOTE,
 	D_QUOTE,
 	S_CHAR,
+	S_SYNTAX,
 	S_SPACE,
 	S_NULL
 }	t_stick_token;
