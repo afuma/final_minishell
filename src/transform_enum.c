@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:37:17 by edesaint          #+#    #+#             */
-/*   Updated: 2024/01/21 17:21:36 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:03:17 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,6 @@ char *transform_enum_quote(t_stick_token num_c)
         return ("S_NULL");
     else
         return ("S_CHAR");
-}
-
-char *transform_enum_type_node(t_type_node num_c)
-{
-    if (num_c == N_CMD)
-        return ("N_CMD");
-    else if (num_c == N_ERROR)
-        return ("N_ERROR");
-    return (NULL);
 }
 
 // // Fonction pour convertir le type de token en type de redirection

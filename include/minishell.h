@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:31:10 by blax              #+#    #+#             */
-/*   Updated: 2024/01/22 22:32:44 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:03:22 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ extern int g_info;
 t_stick_token ft_type_char(char c);
 char *transform_enum_type_token(t_state num_c);
 char *transform_enum_quote(t_stick_token num_c);
-char *transform_enum_type_node(t_type_node num_c);
 
 //builtins.c
 void	ft_cd(t_node *node, t_env *env);
@@ -46,6 +45,8 @@ void	ft_pwd(t_node *node, t_env *env);
 void	ft_unset(t_node *node, t_env *env);
 void	ft_exit(t_node *node, t_env *env);
 void	ft_export(char **args, t_list **env);
+
+// ----------------------------------------------------------------------
 
 // syntax_utils_1.c
 bool is_quote(char c);

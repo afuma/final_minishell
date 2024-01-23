@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 16:22:37 by blax              #+#    #+#             */
-/*   Updated: 2024/01/23 11:44:55 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:02:02 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 # define ENUM_H
 
 typedef enum e_status {
+	FAILURE = 0,
 	SUCCESS = 1,
-	FAILURE = 0
 }	t_status;
 
 typedef enum e_redir {
-	OUT = 1,
-	IN
+	IN = 0,
+	OUT = 1;
 }	t_redir;
 
 typedef enum e_state {

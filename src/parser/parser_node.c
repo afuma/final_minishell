@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:04:42 by edesaint          #+#    #+#             */
-/*   Updated: 2024/01/22 19:29:49 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:06:58 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_node *create_node(t_data *data)
     if (!node)
         return (NULL);
     node->id = data->nb_nodes;
-    node->type = N_CMD;
+    node->type = 1;
     node->tab_exec = NULL;
     node->redir_in = NULL;
     node->redir_out = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 10:04:08 by blax              #+#    #+#             */
-/*   Updated: 2024/01/22 15:17:27 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/01/23 12:07:34 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	verify_and_exec_builtin(t_node *node, t_env *env)
 {
-	if (!node || !node->tab_exec || !node->tab_exec[0] || node->type != N_CMD)
+	if (!node || !node->tab_exec || !node->tab_exec[0] || !node->type)
 		return (ft_putstr_fd("Invalid command\n", STDERR_FILENO),
 			exit(EXIT_FAILURE));
 	if (ft_strcmp(node->tab_exec[0], "echo") == 0)
