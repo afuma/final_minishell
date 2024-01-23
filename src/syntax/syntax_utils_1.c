@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   syntax_utils.c                                     :+:      :+:    :+:   */
+/*   syntax_utils_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 20:01:20 by edesaint          #+#    #+#             */
-/*   Updated: 2024/01/17 14:58:18 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/23 20:37:01 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool is_quote(char c)
 
 bool is_space(char c)
 {
-    return (c == ' ' || c == '\t'); // implementer les autres
+     return (c == ' ' || c == '\t' || c == '\n' || c == '\r');
 }
 
 bool is_syntax_char(char c)

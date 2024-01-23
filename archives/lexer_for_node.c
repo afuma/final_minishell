@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   lexer_for_node.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 13:08:04 by blax              #+#    #+#             */
-/*   Updated: 2024/01/17 13:16:45 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:10:46 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ t_token *create_token(t_data *data, t_node *node, int end)
     token->str = ft_substr(data->str, (unsigned int) node->start_token, (size_t) len);
     token->type_str = ft_type_char(data->str[--end]);
     token->type_stick = ft_type_char(data->str[++end]);
-    token->prev = NULL;
     token->next = NULL;
     
     return (token);
@@ -51,16 +50,12 @@ void add_token(t_data *data, t_node *node, int end)
     if (new_token)
     {
         if (node->tokens == NULL)
-        {
-            new_token->prev = NULL;
             node->tokens = new_token;
-        }
         else
         {
             temp = node->tokens;
             while (temp->next != NULL)
                 temp = temp->next;
-            new_token->prev = temp;
             temp->next = new_token;
         }
     }

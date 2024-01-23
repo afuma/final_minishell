@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 09:27:15 by blax              #+#    #+#             */
-/*   Updated: 2024/01/22 21:05:17 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/23 20:51:30 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char* extract_var_name(const char **ptr)
     const char *start;
 
     start = *ptr;
-    while (ft_isalnum(**ptr) || **ptr == '_')
+    while (!is_syntax(**ptr))
         (*ptr)++;
     return (ft_strndup(start, *ptr - start));
 }
@@ -63,7 +63,7 @@ char* append_variable_value(char *result, const char *varName)
     }
     else
     {
-        varValue = getenv(varName);
+        varValue = getenv(varName); // normalement definie depuis notre environnement
     }
     if (varValue)
     {

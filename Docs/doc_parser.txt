@@ -3,7 +3,51 @@ Reinitialiser brave/chrome
 rm -rf ~/.config/google-chrome/Singleton*
 rm -rf ~/.config/BraveSoftware/Brave-Browser/Singleton*
 --------------------------------------------------------------------------
+cas a gerer pour l'expand
+bash-5.1$ echo $HOME"fdsfgg"
+/mnt/nfs/homes/edesaintfdsfgg
+bash-5.1$ echo $HOME "fdsfgg"
+/mnt/nfs/homes/edesaint fdsfgg
+bash-5.1$ echo $HOME"fds    fgg"
+/mnt/nfs/homes/edesaintfds    fgg
+bash-5.1$ echo $HOME"$HOMEfds    fgg"
+/mnt/nfs/homes/edesaint    fgg
+bash-5.1$ echo $HOME'$HOMEfds    fgg'
+/mnt/nfs/homes/edesaint$HOMEfds    fgg
+bash-5.1$ echo $HOME"$HOME fds    fgg"
+/mnt/nfs/homes/edesaint/mnt/nfs/homes/edesaint fds    fgg
+bash-5.1$ echo $HOME"$HOME'fds    fgg"
+/mnt/nfs/homes/edesaint/mnt/nfs/homes/edesaint'fds    fgg
+bash-5.1$ echo $HOME"$HOME|'fds    fgg"
+/mnt/nfs/homes/edesaint/mnt/nfs/homes/edesaint|'fds    fgg
+bash-5.1$ echo $HOME"$HOME>'fds    fgg"
+/mnt/nfs/homes/edesaint/mnt/nfs/homes/edesaint>'fds    fgg
+bash-5.1$ echo $HOME"$HOME<'fds    fgg"
+/mnt/nfs/homes/edesaint/mnt/nfs/homes/edesaint<'fds    fgg
+bash-5.1$ export L=l
+bash-5.1$ $Ls -la
+bash: -la: command not found
+bash-5.1$ $"L"s -la
+bash: Ls: command not found
+bash-5.1$ "$L"s -la
+
+--------------------------------------------------------------------------
+cas export doit etre gerer
+
+bash-5.1$ export ^=h
+bash: export: `^=h': not a valid identifier
+bash-5.1$ export $h=h
+bash: export: `=h': not a valid identifier
+bash-5.1$ export $h=bonjour
+bash: export: `=bonjour': not a valid identifier
+bash-5.1$ export $h="bonjour"
+bash: export: `=bonjour': not a valid identifier
+bash-5.1$ 
+----------------------------------------------------------------------------
 a voir, les noms des fichiers ne sont pas bons
+important: peut etre initialiser data, comme ca on le gere de a a z 
+    et on est sur de ne pas avoir de problemes quand on lance plusieurs fois (l'executable minishell/ plusieurs commandes dans l'executable)
+    car comme la variable data est dans la stack, il peut garder le pointeur tant que l'executable ./minishell n'est pas terminer
 --------------------------------------------------------------------------
 logique execution des process des commandes
 si une seule commande (un node),

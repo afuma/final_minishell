@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 16:19:02 by blax              #+#    #+#             */
-/*   Updated: 2024/01/23 11:44:18 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:11:46 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct s_token
 	// int nb_two_double_quotes;
 	// int nb_two_single_quotes;
 	struct s_token	*next;
-    struct s_token	*prev;
 }				t_token;
 
 typedef struct s_node

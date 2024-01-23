@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils_1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blax <blax@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 09:25:56 by blax              #+#    #+#             */
-/*   Updated: 2023/12/18 09:26:35 by blax             ###   ########.fr       */
+/*   Updated: 2024/01/23 21:24:01 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ char* process_text_until_next_dollar(const char **ptr, char *result)
     char *temp;
 
     nextDollar = ft_strchr(*(ptr + 1), '$');
-    if (!nextDollar) nextDollar = *ptr + ft_strlen(*ptr); // Si pas de '$', aller à la fin
+    if (!nextDollar)
+        nextDollar = *ptr + ft_strlen(*ptr); // Si pas de '$', aller à la fin
     temp = copy_until_char(result, *ptr, *nextDollar);
     free(result);
     *ptr = nextDollar;

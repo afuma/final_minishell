@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 08:55:05 by blax              #+#    #+#             */
-/*   Updated: 2024/01/19 11:50:06 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:10:59 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void print_tokens(t_token *tokens)
         printf("Token->type_lstick: %s\n", transform_enum_quote(tokens->type_lstick));
         printf("Token->is_space: %i\n", tokens->is_space);
         printf("Token->type_token: %s\n", transform_enum_type_token(tokens->type_token));
-        // printf("Token->prev: %p\n", tokens->prev);
         // printf("Token->current: %p\n", tokens);
         // printf("Token->next: %p\n", tokens->next);
         printf("\n");
