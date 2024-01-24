@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 22:31:24 by edesaint          #+#    #+#             */
-/*   Updated: 2024/01/22 22:31:46 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/24 17:47:50 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,7 @@ void free_data(t_data *data)
     {
         free(data->str);
         data->str = NULL;
+        free(data);
+        data = NULL;
     }
 }

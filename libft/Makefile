@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: blax <blax@student.42.fr>                  +#+  +:+       +#+         #
+#    By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 16:26:14 by wnguyen           #+#    #+#              #
-#    Updated: 2023/12/15 11:48:27 by blax             ###   ########.fr        #
+#    Updated: 2024/01/24 22:05:29 by edesaint         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRC = \
 	./ft_toupper.c \
 	./ft_tolower.c \
 	./ft_strchr.c \
+	./ft_strchr_bool.c \
 	./ft_strrchr.c \
 	./ft_strcmp.c \
 	./ft_strncmp.c \

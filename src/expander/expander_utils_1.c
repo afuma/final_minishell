@@ -6,55 +6,66 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 09:25:56 by blax              #+#    #+#             */
-/*   Updated: 2024/01/23 21:24:01 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/24 21:14:56 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char* expand_variables(const char *input)
+bool is_valid_varname_expand(char c)
 {
-    const char *ptr;
+    return (ft_isalpha(c) || c == '?');
+}
+
+// la decouper pour la rendre plus modulable
+char* expand_variables(t_env *env, char *token_str)
+{
+    char *str;
     char *result;
 
-    ptr = input;
+    str = token_str;
     result = ft_strdup("");
-    while (*ptr)
+    while (*str)
     {
-        if (*ptr == '$' && (ft_isalpha(*(ptr + 1)) || *(ptr + 1) == '?'))
-            result = process_dollar_sign(&ptr, result);
+        if (*str == '$')
+        {
+            if (*(str + 1) == '\0')
+                return (result);
+            if (is_valid_varname_expand(*(str + 1)))
+                result = process_dollar_sign(env, &str, result);
+        }
         else
-            result = process_text_until_next_dollar(&ptr, result);
+            result = process_text_until_next_dollar(&str, result);
     }
 
     return (result);
 }
 
-char* process_dollar_sign(const char **ptr, char *result)
+char* process_dollar_sign(t_env *env, char **str, char *result)
 {
     char *temp;
     char *varName;
 
-    (*ptr)++; // Passer le symbole '$'
-    varName = extract_var_name(ptr);
-    temp = append_variable_value(result, varName);
+    (*str)++; // Passer le symbole '$'
+    varName = extract_var_name(str);
+    temp = append_variable_value(env, result, varName);
     free(result);
     free(varName);
 
     return (temp);
 }
 
-char* process_text_until_next_dollar(const char **ptr, char *result)
+char* process_text_until_next_dollar(char **str, char *result)
 {
-    const char *nextDollar;
+    char *nextDollar;
     char *temp;
 
-    nextDollar = ft_strchr(*(ptr + 1), '$');
+    nextDollar = ft_strchr(*(str + 1), '$');
     if (!nextDollar)
-        nextDollar = *ptr + ft_strlen(*ptr); // Si pas de '$', aller à la fin
-    temp = copy_until_char(result, *ptr, *nextDollar);
+        nextDollar = *str + ft_strlen(*str); // Si pas de '$', aller à la fin
+    temp = copy_until_char(result, *str, *nextDollar);
     free(result);
-    *ptr = nextDollar;
+    *str = nextDollar;
 
     return (temp);
 }

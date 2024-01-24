@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   filter_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/13 21:08:17 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/01/24 22:37:19 by edesaint         ###   ########.fr       */
+/*   Created: 2024/01/24 21:57:05 by edesaint          #+#    #+#             */
+/*   Updated: 2024/01/24 22:24:31 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "../../include/minishell.h"
 
-char	*ft_strchr(const char *s, int c)
+bool pass_on_filters(t_data *data)
 {
-	int		i;
-	char	cc;
-
-	i = 0;
-	cc = (char)c;
-	if (!s)
-		return (NULL);
-	while (s[i] != '\0')
-	{
-		if (s[i] == cc)
-			return ((char *)(s + i));
-		i++;
-	}
-	if (s[i] == (char)c)
-		return ((char *)(s + i));
-	return (NULL);
+    if (!process_tokens(data, &is_noreserved_word))
+        return (false);
+    if (!process_tokens(data, &is_valid_affectation))
+        return (false);
+    return (true);
 }

@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strchr_bool.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 21:08:17 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/01/24 22:37:19 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/24 22:07:31 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-char	*ft_strchr(const char *s, int c)
+bool	ft_strchr_bool(const char *str, int c)
 {
 	int		i;
 	char	cc;
 
 	i = 0;
 	cc = (char)c;
-	if (!s)
-		return (NULL);
-	while (s[i] != '\0')
+	if (!str)
+		return (0);
+	while (str[i])
 	{
-		if (s[i] == cc)
-			return ((char *)(s + i));
+		if (str[i] == cc)
+			return (true);
 		i++;
 	}
-	if (s[i] == (char)c)
-		return ((char *)(s + i));
-	return (NULL);
+	return (false);
 }

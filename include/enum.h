@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 16:22:37 by blax              #+#    #+#             */
-/*   Updated: 2024/01/23 12:02:02 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:09:18 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef enum e_status {
 
 typedef enum e_redir {
 	IN = 0,
-	OUT = 1;
+	OUT = 1
 }	t_redir;
 
 typedef enum e_state {

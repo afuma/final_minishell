@@ -3,20 +3,80 @@ Reinitialiser brave/chrome
 rm -rf ~/.config/google-chrome/Singleton*
 rm -rf ~/.config/BraveSoftware/Brave-Browser/Singleton*
 --------------------------------------------------------------------------
+
+Voir Olivier pour execution (on ne verifie pas les fichiers avant dans le parsing)
+mais apres les forks, dans l'exec
+
+--------------------------------------------------------------------------
+A faire en prioriter (24/01/2023):
+
+ETAPE 1: OK
+    - gerer les tokens dont leurs str est un mot reserver
+        et meme si le token est dans un quote, par exemple if ou 'if'
+    doc: https://www.gnu.org/software/bash/manual/html_node/Reserved-Words.html
+
+reserved words:
+if	then	elif	else	fi	time
+for	in	until	while	do	done
+case	esac	coproc	select	function
+{	}	[[	]]	!
+
+ETAPE 2: OK
+doc: https://opensource.com/article/17/6/bash-parameter-expansion
+implementer l'affectation de variable et d'expansion pure
+Lors de l'attribution d'une variable, son nom doit être composé uniquement de caractères alphanumériques 
+et de traits de soulignement, et il ne peut pas commencer par un chiffre. 
+Il ne peut y avoir aucun espace autour du signe égal ; 
+le nom doit le précéder immédiatement et la valeur suivre immédiatement :
+
+$ variable_1="my content"
+
+Ce qui implique l'etape qui suit:
+    - apres le dollar il faut que la syntaxe correspondent a celle de l'etape 2 pour car c'est le nom de 
+    la variable d'environnement que l'on souhaite appeller
+
+On gere ce cas ci infiner: 
+doc: https://opensource.com/article/17/6/bash-parameter-expansion
+si dans un token->str on a "${" alors on envoie un message disant: l'expander de gere pas ce cas.
+il ne gere que l'expansion avec une chaine de caractere en lien avec les variables d'environnement 
+et le caractere '?'
+
+ETAPE 4: OK
+    - creer une fonction pour parcourir le tableau env et verifier puis recuperer la variable d'environnement
+    si il y en a une qui correspond
+
+ETAPE 5:
+Definir et implementer les filtres les plus importants:
+- par exemple, echo' bonjour'
+- si token->type_token == T_COMMAND et token->rstick_token == is_quote(token->str) etc..
+
+ETAPE 6:
+doc: https://www.gnu.org/software/bash/manual/html_node/Tilde-Expansion.html
+    - gerer l'expansion du tilde
+        expand tilde + et tilde -
+
+ETAPE 7:
+    - parcourir le env pour l'expand de variable et voir si la variable a expander est correspond a un nom de variable dans le env
+    (reprendre les fonctions de Will pour ca) -> ft_env et le mini-parser de env pour savoir si c'est un nom de variable valide
+
+ETAPE 8:
+    - aller dans gerer_expand.txt et gerer les cas particulier qui se trouvent a l'interieur
+
+--------------------------------------------------------------------------
 cas a gerer pour l'expand
-bash-5.1$ echo $HOME"fdsfgg"
+bash-5.1$ echo $HOME"fdsfgg" -> cas (1) particulier a gerer
 /mnt/nfs/homes/edesaintfdsfgg
-bash-5.1$ echo $HOME "fdsfgg"
+bash-5.1$ echo $HOME "fdsfgg" -> cas (2) classique gerer par echo et fonctionne avec mon lexing
 /mnt/nfs/homes/edesaint fdsfgg
-bash-5.1$ echo $HOME"fds    fgg"
+bash-5.1$ echo $HOME"fds    fgg" -> gerer par le cas (1)
 /mnt/nfs/homes/edesaintfds    fgg
-bash-5.1$ echo $HOME"$HOMEfds    fgg"
+bash-5.1$ echo $HOME"$HOMEfds    fgg" -> gerer par le cas (1), bien verifier pas d'espaces supplementaires
 /mnt/nfs/homes/edesaint    fgg
-bash-5.1$ echo $HOME'$HOMEfds    fgg'
+bash-5.1$ echo $HOME'$HOMEfds    fgg' -> pris en compte dans le cas (1)
 /mnt/nfs/homes/edesaint$HOMEfds    fgg
-bash-5.1$ echo $HOME"$HOME fds    fgg"
+bash-5.1$ echo $HOME"$HOME fds    fgg" -> gerer par le cas (1)
 /mnt/nfs/homes/edesaint/mnt/nfs/homes/edesaint fds    fgg
-bash-5.1$ echo $HOME"$HOME'fds    fgg"
+bash-5.1$ echo $HOME"$HOME'fds    fgg" -> gerer par le cas (1)
 /mnt/nfs/homes/edesaint/mnt/nfs/homes/edesaint'fds    fgg
 bash-5.1$ echo $HOME"$HOME|'fds    fgg"
 /mnt/nfs/homes/edesaint/mnt/nfs/homes/edesaint|'fds    fgg

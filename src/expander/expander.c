@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 23:04:42 by blax              #+#    #+#             */
-/*   Updated: 2024/01/23 21:22:12 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:24:04 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool is_expandable(t_token *token)
     return (token->type_str == D_QUOTE || token->type_str == S_CHAR);
 }
 
-void expand_tokens(t_data *data)
+void expand_tokens(t_data *data, t_env *env)
 {
     t_token *cur_token;
     char *expanded_value;
@@ -38,7 +38,7 @@ void expand_tokens(t_data *data)
     {
         if (is_expandable(cur_token))
         {
-            expanded_value = expand_variables(cur_token->str);
+            expanded_value = expand_variables(env, cur_token->str);
             if (expanded_value)
             {
                 replace_token_str(cur_token, expanded_value);

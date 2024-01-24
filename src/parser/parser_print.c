@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:31:59 by edesaint          #+#    #+#             */
-/*   Updated: 2024/01/21 22:59:29 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:36:44 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void print_nodes(t_data *data)
     while (node != NULL)
 	{
         printf("Node %d:\n", node->id);
-        printf("type %s:\n", transform_enum_type_node(node->type));
+        printf("type %d:\n", node->type);
         print_tab_exec(node);
         print_redir(node);
         node = node->next;

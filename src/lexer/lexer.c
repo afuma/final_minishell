@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 13:08:04 by blax              #+#    #+#             */
-/*   Updated: 2024/01/22 21:54:10 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/24 21:39:22 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,16 @@ bool process_syntax(t_data *data, int *i)
 
 bool process_string(t_data *data, int *i)
 {
-    if (is_syntax(data->str[*i]))
+    char c;
+    
+    c = data->str[*i];
+    if (is_space(c) || is_syntax_char(c))
         return (false);
-    while (data->str[*i] && !is_syntax(data->str[*i]))
+    while (c && !is_space(c) && !is_syntax_char(c))
+    {
         (*i)++;
+        c = data->str[*i];
+    }
     return (true);
 }
 

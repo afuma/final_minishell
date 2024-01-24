@@ -1,7 +1,10 @@
 {
   "files.associations": {
     "minishell.h": "c",
-    "stdio.h": "c"
+    "stdio.h": "c",
+    "minishell_doc": "c",
+    "libft.h": "c",
+    "stdbool.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": ""
 }

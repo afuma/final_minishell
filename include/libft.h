@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blax <blax@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 21:10:09 by wnguyen           #+#    #+#             */
-/*   Updated: 2023/12/15 11:48:16 by blax             ###   ########.fr       */
+/*   Updated: 2024/01/24 22:07:21 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <wchar.h>
+# include <stdbool.h>
+
 // # define MAX(A, B) (A > B ? A : B)
 // # define MIN(A, B) (A > B ? B : A)
 
@@ -54,6 +56,7 @@ size_t		ft_strlen(const char *s);
 size_t		ft_strlcat(char *dst, const char *src, size_t size);
 size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 char		*ft_strchr(const char *s, int c);
+bool		ft_strchr_bool(const char *str, int c);
 char		*ft_strrchr(const char *s, int c);
 int			ft_strcmp(const char *s1, const char *s2);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);

@@ -6,19 +6,19 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 09:27:15 by blax              #+#    #+#             */
-/*   Updated: 2024/01/23 20:51:30 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/24 21:12:12 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 // Fonction pour copier la chaîne jusqu'au caractère délimitateur
-char* copy_until_char(char *dest, const char *src, char delimiter)
+char* copy_until_char(char *dest, char *src, char delimiter)
 {
     size_t len_new_result;
     size_t len;
     size_t n;
-    const char *ptr;
+    char *ptr;
     char *newResult;
 
     len = ft_strlen(dest);
@@ -38,28 +38,31 @@ char* copy_until_char(char *dest, const char *src, char delimiter)
 }
 
 // Fonction pour extraire le nom de la variable
-char* extract_var_name(const char **ptr)
+char* extract_var_name(char **str)
 {
     const char *start;
 
-    start = *ptr;
-    while (!is_syntax(**ptr))
-        (*ptr)++;
-    return (ft_strndup(start, *ptr - start));
+    start = *str;
+    // while (!is_syntax(**str) && !is_special_chars())
+    while (ft_isalnum(**str) || **str == '_')
+        (*str)++;
+    return (ft_strndup(start, *str - start));
 }
 
 // Fonction pour ajouter la valeur de la variable au résultat
-char* append_variable_value(char *result, const char *varName)
+char* append_variable_value(t_env *env, char *result, char *varName)
 {
     char *varValue;
     size_t newLength;
     char *newResult;
 
+    env->lst_exit = 0;
+    env->lst_exit++;
     // Gestion spéciale pour le cas "$?"
     if (ft_strcmp(varName, "?") == 0)
     {
-        varValue = ft_itoa(g_info); // Vous devez définir cette fonction
-        // varValue = ft_itoa(get_last_exit_status()); // Vous devez définir cette fonction
+        // varValue = ft_itoa(g_info); // Vous devez définir cette fonction
+        varValue = ft_itoa(env->lst_exit);
     }
     else
     {

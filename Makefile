@@ -2,12 +2,15 @@
 SRC_DIR = src/
 OBJ_DIR = obj/
 
-SRC_FILES = main.c \
+SRC_FILES = off_main.c \
 			transform_enum.c \
 			syntax/syntax.c \
 			syntax/syntax_utils_1.c \
 			syntax/syntax_utils_2.c \
 			syntax/syntax_utils_3.c \
+			filters/filter_affectation.c \
+			filters/filter_main.c \
+			filters/utils_1.c \
 			lexer/lexer.c \
 			lexer/lexer_token.c \
 			lexer/lexer_utils_1.c \
@@ -31,6 +34,8 @@ SRC_FILES = main.c \
 			error.c \
 			free/free.c \
 			free/free_2.c \
+			init/init_data.c \
+			init/init_env.c \
 			# off_main.c \
 			# builtins/ft_echo.c \
 			# builtins/ft_env.c \
