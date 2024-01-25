@@ -1,16 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_quote.c                                     :+:      :+:    :+:   */
+/*   filter_quotes_methode_1.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 09:10:16 by blax              #+#    #+#             */
-/*   Updated: 2024/01/23 12:15:37 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:13:59 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+// implementer ces deux fonctions avec d'autres
+// (s'il y a une chaine avant ou apres, pouvoir les concatener)
+bool filter_quotes(char *str)
+{
+    if (ft_strchr_bool(str, '\''))
+        remove_quotes(str, '\'');
+    else if (ft_strchr_bool(str, '\"'))
+        remove_quotes(str, '"');
+}
 
 void remove_quotes(char *input, char type_quote)
 {
@@ -21,20 +31,5 @@ void remove_quotes(char *input, char type_quote)
     {
         ft_memmove(input, input + 1, len - 2);
         input[len - 2] = '\0';
-    }
-}
-
-void parse_quote_tokens(t_data *data)
-{
-	t_token *cur_token;
-
-	cur_token = data->token;
-    while (cur_token)
-	{
-        if (cur_token->type_str == S_QUOTE)
-			remove_quotes(cur_token->str, '\'');
-		else if (cur_token->type_str == D_QUOTE)
-			remove_quotes(cur_token->str, '"');
-        cur_token = cur_token->next;
     }
 }

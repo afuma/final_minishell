@@ -1,4 +1,13 @@
+christophe portneuve
+prof de programmation de Fabrice (ami a Olivier)
+cours git: https://www.youtube.com/watch?v=ypR-rEBCoag
 
+crwdsec : logiciel opensource cybersecurite que l'on peut implementer soit meme
+
+Triple Ref Pointers - Computerphile: methode pour les listes chainer optimiser
+https://www.youtube.com/watch?v=0ZEX_l0DFK0
+
+-----------------------------------------------------------------------
 Reinitialiser brave/chrome
 rm -rf ~/.config/google-chrome/Singleton*
 rm -rf ~/.config/BraveSoftware/Brave-Browser/Singleton*
@@ -8,18 +17,26 @@ Voir Olivier pour execution (on ne verifie pas les fichiers avant dans le parsin
 mais apres les forks, dans l'exec
 
 --------------------------------------------------------------------------
-A faire en prioriter (24/01/2023):
+j'ai deux facons de faire:
+    - soit je manipule les tokens avec les quotes dedans (squote, dquote et multiple squote et dquote)
+         - en utilisant une fonction process str, qui va boucler sur les characteres et voir qu'elle fonction appliquer (pointeur de fonctions)
+    - soit je garde ma structure actuelle et je manipule tout avec des filtres conditionnelles en fonction des informations contenu dans chaque token
 
-ETAPE 1: OK
-    - gerer les tokens dont leurs str est un mot reserver
-        et meme si le token est dans un quote, par exemple if ou 'if'
-    doc: https://www.gnu.org/software/bash/manual/html_node/Reserved-Words.html
+Pour la methode 1:
+// il me faut une fonction qui
+cherche un caractere, si il le trouve alors il copie la chaine, la met dans la variable result,
+puis faire l'operation desirer (soit pour le dollar, soit pour les quotes)
+puis boucler sur ce processus pour chaque token
 
-reserved words:
-if	then	elif	else	fi	time
-for	in	until	while	do	done
-case	esac	coproc	select	function
-{	}	[[	]]	!
+Pour la methode 2:
+creer les filtres
+
+la methode 2 n'est pas bien puisque l'on manipule les quotes et que l'on doit fusionner les tokens
+mais apres on peut faire une fonction fusion, mais faut aussi implementer le fait de modifier les attributs, pourquoi pas !?
+
+on test avec la methode 2 puis on implementeras la methode 1 plus tards si le temps, ou si la methode 2 ne fonctionne pas
+
+--------------------------------------------------------------------------
 
 ETAPE 2: OK
 doc: https://opensource.com/article/17/6/bash-parameter-expansion
@@ -56,10 +73,6 @@ doc: https://www.gnu.org/software/bash/manual/html_node/Tilde-Expansion.html
         expand tilde + et tilde -
 
 ETAPE 7:
-    - parcourir le env pour l'expand de variable et voir si la variable a expander est correspond a un nom de variable dans le env
-    (reprendre les fonctions de Will pour ca) -> ft_env et le mini-parser de env pour savoir si c'est un nom de variable valide
-
-ETAPE 8:
     - aller dans gerer_expand.txt et gerer les cas particulier qui se trouvent a l'interieur
 
 --------------------------------------------------------------------------

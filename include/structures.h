@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 16:19:02 by blax              #+#    #+#             */
-/*   Updated: 2024/01/23 12:11:46 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/25 20:09:59 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_data
     char            *str;
     struct s_token	*token;
 	struct s_node	*node;
+	struct s_env    *env;
 }				t_data;
 
 #endif

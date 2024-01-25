@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 09:33:24 by blax              #+#    #+#             */
-/*   Updated: 2024/01/22 11:43:13 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:27:46 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void parser(t_data *data)
 {
-    parse_quote_tokens(data);
+    // parse_quote_tokens(data);
     init_nodes(data);
     fill_nodes(data);
 }

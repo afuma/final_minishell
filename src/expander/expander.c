@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 23:04:42 by blax              #+#    #+#             */
-/*   Updated: 2024/01/24 16:24:04 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/25 22:32:38 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,42 +28,24 @@ bool is_expandable(t_token *token)
     return (token->type_str == D_QUOTE || token->type_str == S_CHAR);
 }
 
-void expand_tokens(t_data *data, t_env *env)
+// a implementer dans filter_main.c
+void expand_tokens(t_data *data, char *str)
 {
-    t_token *cur_token;
-    char *expanded_value;
+    char *str_expand;
 
-    cur_token = data->token;
-    while (cur_token)
+    if (is_expandable(str))
     {
-        if (is_expandable(cur_token))
+        str_expand = expand_variables(data->env, str);
+        if (str_expand)
         {
-            expanded_value = expand_variables(env, cur_token->str);
-            if (expanded_value)
-            {
-                replace_token_str(cur_token, expanded_value);
-                free(expanded_value); // Je ne pense pas qu'il doit etre free
-            }
+            replace_token_str(str, str_expand);
+            free(str_expand);
         }
-        if (cur_token)
-            cur_token = cur_token->next;
     }
 }
 
-void replace_token_str(t_token *token, char *new_value)
+void replace_token_str(char *str, char *new_value)
 {
-    free(token->str);
-    token->str = ft_strdup(new_value);
+    free(str);
+    str = ft_strdup(new_value);
 }
-
-// void print_expanded_tokens(t_token *tokens)
-// {
-//     while (tokens != NULL)
-// 	{
-//         if (is_empty_token(tokens))
-//             printf("%s", tokens->str);
-//         else
-//             printf(" %s", tokens->str);
-//         tokens = tokens->next;
-//     }
-// }

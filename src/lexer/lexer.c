@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 13:08:04 by blax              #+#    #+#             */
-/*   Updated: 2024/01/24 21:39:22 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:27:25 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,38 @@ bool process_syntax(t_data *data, int *i)
     return (true);
 }
 
+// // methode 1 (quote n'est pas un delimiter)
+// bool process_string(t_data *data, int *i)
+// {
+//     char c;
+    
+//     c = data->str[*i];
+//     if (is_space(c) || is_syntax_char(c))
+//         return (false);
+//     while (c && !is_space(c) && !is_syntax_char(c))
+//     {
+//         (*i)++;
+//         c = data->str[*i];
+//     }
+//     return (true);
+// }
+
+// methode 2 (quote est un delimiteur)
 bool process_string(t_data *data, int *i)
 {
     char c;
     
     c = data->str[*i];
-    if (is_space(c) || is_syntax_char(c))
+    if (is_syntax(c))
         return (false);
-    while (c && !is_space(c) && !is_syntax_char(c))
+    while (c && !is_syntax(c))
     {
         (*i)++;
         c = data->str[*i];
     }
     return (true);
 }
+
 
 /* Traite une séquence de guillemets dans la chaîne de caractères de 'data'. */
 bool process_quote(t_data *data, int *i)

@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 22:31:24 by edesaint          #+#    #+#             */
-/*   Updated: 2024/01/24 17:47:50 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/25 20:13:27 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ void free_data(t_data *data)
     {
         free(data->str);
         data->str = NULL;
+        data->env = NULL; // il n'y a qu'un seul env dans minishell 
+            // (le mettre a null empechera la structure data de le free je suppose donc a tester)
+            // comme ca on enleve la reference vers la zone memoire sans la detruire
         free(data);
         data = NULL;
     }

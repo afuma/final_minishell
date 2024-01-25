@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:36:42 by edesaint          #+#    #+#             */
-/*   Updated: 2024/01/24 22:28:01 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:48:22 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,31 +44,3 @@ bool process_tokens(t_data *data, bool (*f)(char *str))
     return (true);
 }
 
-bool is_noreserved_word(char *str)
-{
-    return (!is_reserved_word(str));
-}
-
-bool is_reserved_word(char *str)
-{
-    return (
-        ft_strcmp(str, "if") == 0 || 
-        ft_strcmp(str, "then") == 0 || 
-        ft_strcmp(str, "elif") == 0 || 
-        ft_strcmp(str, "else") == 0 || 
-        ft_strcmp(str, "time") == 0 || 
-        ft_strcmp(str, "for") == 0 || 
-        ft_strcmp(str, "in") == 0 || 
-        ft_strcmp(str, "until") == 0 || 
-        ft_strcmp(str, "while") == 0 || 
-        ft_strcmp(str, "done") == 0 || 
-        ft_strcmp(str, "case") == 0 || 
-        ft_strcmp(str, "esac") == 0 || 
-        ft_strcmp(str, "coproc") == 0 || 
-        ft_strcmp(str, "select") == 0 || 
-        ft_strcmp(str, "{") == 0 || 
-        ft_strcmp(str, "}") == 0 || 
-        ft_strcmp(str, "[[") == 0 || 
-        ft_strcmp(str, "]]") == 0 || 
-        ft_strcmp(str, "!") == 0);
-}

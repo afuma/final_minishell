@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:31:10 by blax              #+#    #+#             */
-/*   Updated: 2024/01/24 22:40:53 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/25 22:20:36 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,28 +37,30 @@ t_stick_token ft_type_char(char c);
 char *transform_enum_type_token(t_state num_c);
 char *transform_enum_quote(t_stick_token num_c);
 
-// ------------------------- Builtin ---------------------------------
+// // ------------------------- Builtin ---------------------------------
 
-//builtins.c
-int		ft_cd(t_node *node, t_env *env);
-int		ft_echo(t_node *node, t_env *env);
-int		ft_env(t_node *node, t_env *env);
-int		ft_pwd(t_node *node, t_env *env);
-int		ft_unset(t_node *node, t_env *env);
-int		ft_exit(t_node *node, t_env *env);
-int		ft_export(t_node *node, t_env *env);
+// //builtins.c
+// void		ft_cd(t_node *node, t_env *env);
+// void		ft_echo(t_node *node, t_env *env);
+// void		ft_env(t_node *node, t_env *env);
+// void		ft_pwd(t_node *node, t_env *env);
+// void		ft_unset(t_node *node, t_env *env);
+// void		ft_exit(t_node *node, t_env *env);
+// void		ft_export(t_node *node, t_env *env);
 
-//ft_unset.c util
-int		is_valid_env_name(const char *str);
+// //ft_unset.c util
+// int		is_valid_env_name(const char *str);
 
-//env_utils.c
-void	add_env_var(t_env *env, const char *name, const char *content);
-void	update_env_var(t_env *env, const char *name, const char *content);
-char	*get_env_name(t_env *env, const char *name);
+// //env_utils.c
+// void	add_env_var(t_env *env, const char *name, const char *content);
+// void	update_env_var(t_env *env, const char *name, const char *content);
+// char	*get_env_name(t_env *env, const char *name);
+// char	*join_var_in_str(t_env_link *env_link);
+// char	**convert_env_to_tab(t_env *env);
 
-//ft_unset.c
-int		is_valid_env_name(const char *str);
-void	unset_error(char *arg);
+// //ft_unset.c
+// int		is_valid_env_name(const char *str);
+// void	unset_error(char *arg);
 
 // ------------------------- Syntax ---------------------------------
 
@@ -109,16 +111,16 @@ void free_all(t_data *data);
 bool ft_error(char *str);
 void ft_error_2(char *str);
 
-// ------------------ Init --------------------
+// // ------------------ Init --------------------
 
-// init_env.c
-t_env_link	*env_new_link(char *str);
-void		env_connect_links(t_env_link *prev, t_env_link *current);
-t_env	*init_mini_env();
-t_env	*init_env(char **system_env);
+// // init_env.c
+// t_env_link	*env_new_link(char *str);
+// void		env_connect_links(t_env_link *prev, t_env_link *current);
+// t_env	*init_mini_env();
+// t_env	*init_env(char **system_env);
 
 //init_data.c
-t_data	*init_data(char *str);
+t_data	*init_data(char *str, t_env *env);
 
 // ------------------ Lexer --------------------
 // lexer.c
@@ -202,8 +204,8 @@ char **create_tab_exec(t_data *data, t_token *token, int nb_args);
 char **init_tab_exec(t_data *data, t_token *token);
 
 // parser_quote.c
-void parse_quote_tokens(t_data *data);
-void remove_quotes(char *input, char type_quote);
+// void parse_quote_tokens(t_data *data);
+// void remove_quotes(char *input, char type_quote);
 
 // parser_type_token.c
 void update_token_type(t_token *token, bool *is_cmd, t_state cur_state);
@@ -214,7 +216,8 @@ void determine_next_token_type(t_state type_token, t_state *cur_state);
 
 // expander.c
 bool is_expandable(t_token *token);
-void expand_tokens(t_data *data, t_env *env);
+// void expand_tokens(t_data *data, t_env *env);
+void expand_tokens(t_data *data);
 void replace_token_str(t_token *token, char *new_value);
 // void print_expanded_tokens(t_token *tokens);
 
@@ -236,13 +239,35 @@ char* copy_until_char(char *dest, char *src, char delimiter);
 // filter_main.c
 bool pass_on_filters(t_data *data);
 
-// utils_1.c
+// utils.c
 bool process_tokens(t_data *data, bool (*f)(char *str));
-bool is_reserved_word(char *str);
-bool is_noreserved_word(char *str);
+
+// filter_reserved_word.c
+bool filter_reserved_word(char *str);
+bool filter_authorized_word(char *str);
 
 // filter_affectation.c
-bool is_valid_affectation(char *str);
-bool is_valid_affectation_varname(char *str, char *sign_equal);
+bool filter_affectation(char *str);
+bool filter_affectation_varname(char *str, char *sign_equal);
+// bool filter_affectation_content(char *str, char *sign_equal);
+
+// filter_quotes.c
+bool filter_quotes(char *str);
+bool remove_quotes(char *input, char type_quote);
+
+// ------------------ EXEC --------------------
+
+// //exec.c
+// void	execute_command_node(t_node *node, t_env *env);
+// int		builtin_command(t_node *node, t_env *env, int pid);
+// bool	is_builtin(t_node *node);
+// char	*get_cmd_path(char *cmd, char **envp);
+// int		exec_builtin(t_node *node, t_env *env);
+// int		execute_command(t_node *node, char **envp);
+
+// // signals.c
+
+// void	handle_sigint(int signum);
+// bool	handle_ctrl_d(char *input);
 
 #endif

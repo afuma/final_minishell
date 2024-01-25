@@ -47,7 +47,7 @@
 
 // int main(int argc, char *argv[])
 // {
-//     t_data data;
+//     t_data *data;
 //     char *command;
 
 //     if (argc > 1)

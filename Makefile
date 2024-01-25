@@ -9,8 +9,10 @@ SRC_FILES = off_main.c \
 			syntax/syntax_utils_2.c \
 			syntax/syntax_utils_3.c \
 			filters/filter_affectation.c \
+			filters/filter_reserved_words.c \
 			filters/filter_main.c \
-			filters/utils_1.c \
+			filters/filter_quotes.c \
+			filters/utils.c \
 			lexer/lexer.c \
 			lexer/lexer_token.c \
 			lexer/lexer_utils_1.c \
@@ -25,7 +27,6 @@ SRC_FILES = off_main.c \
 			parser/parser_node.c \
 			parser/parser_getters.c \
 			parser/parser_type_token.c \
-			parser/parser_quote.c \
 			parser/parser_print.c \
 			expander/expander.c \
 			expander/expander_utils_1.c \
@@ -36,7 +37,6 @@ SRC_FILES = off_main.c \
 			free/free_2.c \
 			init/init_data.c \
 			init/init_env.c \
-			# off_main.c \
 			# builtins/ft_echo.c \
 			# builtins/ft_env.c \
 			# builtins/ft_exit.c \
@@ -44,7 +44,17 @@ SRC_FILES = off_main.c \
 			# builtins/ft_unset.c \
 			# builtins/ft_export.c \
 			# exec/exec.c \
+			# exec/exec_builtin.c \
+			# exec/exec_cmd.c \
+			# exec/get_path.c \
+			# init/init_data.c \
+			# init/init_env.c \
+			# env/env_utils.c \
+			# signals/signals.c \
+			# builtins/ft_cd.c \
 			# exec/file_redir.c \
+			# parser/parser_quote.c \
+			# off_main.c \
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ = $(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o))
