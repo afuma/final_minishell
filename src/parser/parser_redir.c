@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:15:57 by edesaint          #+#    #+#             */
-/*   Updated: 2024/01/22 20:38:28 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:48:32 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,11 +126,13 @@ bool update_redir(t_node *node, t_token *token)
     return (true);
 }
 
-// parcourir le maillon et creer si necessaire les fichiers parcourus
 bool init_redir(t_data *data, t_node *node, t_token *token)
 {
     while (token && in_node(data, token))
     {
+        // creer une fonction pour parcourir tous les tokens et verifier si heredoc ou non
+        // on recupere directement le delimiter que l'on utilise dans la fonction
+        // et cette fonction creer le heredoc et met a jour le node (attribut heredoc)
         update_redir(node, token);
         token = token->next;
     }

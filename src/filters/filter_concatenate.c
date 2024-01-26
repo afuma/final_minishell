@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 22:33:37 by edesaint          #+#    #+#             */
-/*   Updated: 2024/01/25 22:57:42 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:36:17 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,36 @@
 // ou voir comment passer plusieurs argument avec un pointeur de fonction
 bool filter_concatenate(t_token *token)
 {
-    if (!token->is_space)
-        
+    // if (!token || token->id == 0)
+    //     return (true);
+    while (token && token->next && !is_space_between_tokens(token))
+        merge_token(token, token->next);
+    return (true);
+}
 
+bool is_space_between_tokens(t_token *token)
+{
+    if (token && token->next)
+    {
+        if (token->next->is_space)
+            return (true);
+    }
+    return (false);
 }
 
 // le token de destination est celui de gauche
 // et le token source est celui de droite
 bool merge_token(t_token *dst, t_token *src)
 {
-    dst->is_space = false;
+    if (!dst || !src)
+        return (false);
+    dst->is_space = 0;
     dst->next = src->next;
     dst->type_rstick = src->type_rstick;
     dst->str = merge_token_str(dst, src);
+    free(src);
+    src = NULL;
+    return (true);
 }
 
 char *merge_token_str(t_token *dst, t_token *src)
@@ -42,8 +59,8 @@ char *merge_token_str(t_token *dst, t_token *src)
     new_str = malloc (sizeof(char) * len_new_str);
     if (!new_str)
         return (NULL);
-    ft_strlcpy(new_str, dst, len_new_str);
-    ft_strlcat(new_str, src, len_new_str);
+    ft_strlcpy(new_str, dst->str, len_new_str);
+    ft_strlcat(new_str, src->str, len_new_str);
     free(dst->str);
     dst->str = NULL;
     free(src->str);

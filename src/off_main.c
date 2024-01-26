@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:26:34 by blax              #+#    #+#             */
-/*   Updated: 2024/01/25 22:30:41 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/26 12:50:31 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,18 @@ int main(int argc, char *argv[])
     my_env = NULL;
     data = init_data(argv[1], my_env);
     if (!is_closed_quotes(data))
-        ft_error_2("unclosed quotes");
+        ft_error_2(data, "unclosed quotes");
     ft_lexer(data);
+    if (!data->token)
+        return (free_all(data), 0);
     determine_token_types(data);
     if (!verif_syntax(data->token))
     {
-        free_tokens(data->token);
-        ft_error_2("syntax_erreur");
+        // free_tokens(data->token);
+        ft_error_2(data, "syntax_erreur");
     }
     if (!pass_on_filters(data))
-        ft_error_2("syntax_erreur");
+        ft_error_2(data, "filter_erreur");
     parser(data);
     print_tokens(data->token);
     print_nodes(data);

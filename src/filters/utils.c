@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_1.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:36:42 by edesaint          #+#    #+#             */
-/*   Updated: 2024/01/25 16:48:22 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/26 11:01:22 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,3 @@
 // }
 
 // if (token->type_token == T_COMMAND && token->rstick_token == is_quote(token->str))
-
-bool process_tokens(t_data *data, bool (*f)(char *str))
-{
-    t_token *token;
-    
-    token = data->token;
-    while (token)
-    {
-        if (!f(token->str))
-            return (false);
-        token = token->next;
-    }
-    return (true);
-}
-

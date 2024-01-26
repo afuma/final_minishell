@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 21:57:05 by edesaint          #+#    #+#             */
-/*   Updated: 2024/01/25 20:08:38 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:28:13 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 bool pass_on_filters(t_data *data)
 {
+    if (!data->token)
+        return (true);
+    if (!process_tokens(data, &filter_quotes))
+        return (false);
+    ft_token_iter(data, &filter_concatenate);
     if (!process_tokens(data, &filter_authorized_word))
         return (false);
     if (!process_tokens(data, &filter_affectation))
         return (false);
-    if (!process_tokens(data, &filter_quotes))
-        return (false);
-    if (!process_tokens(data, &filter_quotes))
-        return (false);
-    if (!process_tokens(data, &expand_tokens))
-        return (false);
+    ft_token_iter_expander(data, &expand_tokens);
     return (true);
 }

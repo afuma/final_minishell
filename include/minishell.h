@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:31:10 by blax              #+#    #+#             */
-/*   Updated: 2024/01/25 22:20:36 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/26 21:11:55 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void free_all(t_data *data);
 
 // error.c
 bool ft_error(char *str);
-void ft_error_2(char *str);
+void ft_error_2(t_data *data, char *str);
 
 // // ------------------ Init --------------------
 
@@ -122,6 +122,15 @@ void ft_error_2(char *str);
 //init_data.c
 t_data	*init_data(char *str, t_env *env);
 
+// ------------------ Utils --------------------
+
+// utils.c
+void	ft_token_add_back(t_token **token, t_token *newlist);
+t_token	*ft_token_last(t_token *token);
+void	ft_token_iter(t_data *data, bool (*f)(t_token *));
+bool process_tokens(t_data *data, bool (*f)(char *str));
+void	ft_token_iter_expander(t_data *data, void (*f)(t_env *, char *));
+
 // ------------------ Lexer --------------------
 // lexer.c
 bool ft_lexer(t_data *data);
@@ -133,11 +142,6 @@ bool process_syntax(t_data *data, int *i);
 int set_len(t_data *data, int end);
 bool skip_spaces(t_data *data, int *i);
 bool is_empty_quotes(t_data *data, int *i);
-
-// lexer_utils_2.c
-void	ft_token_add_back(t_token **token, t_token *newlist);
-t_token	*ft_token_last(t_token *token);
-void	ft_token_iter(t_token *token, void (*f)(void *));
 
 // lexer_token.c
 t_stick_token set_type_lstick(t_data *data);
@@ -217,8 +221,9 @@ void determine_next_token_type(t_state type_token, t_state *cur_state);
 // expander.c
 bool is_expandable(t_token *token);
 // void expand_tokens(t_data *data, t_env *env);
-void expand_tokens(t_data *data);
-void replace_token_str(t_token *token, char *new_value);
+void expand_tokens(t_env *env, char *str);
+void replaceString(char **original, const char *newString);
+// char *replace_token_str(char *str, char *new_value);
 // void print_expanded_tokens(t_token *tokens);
 
 // expander_utils_1.c
@@ -239,9 +244,6 @@ char* copy_until_char(char *dest, char *src, char delimiter);
 // filter_main.c
 bool pass_on_filters(t_data *data);
 
-// utils.c
-bool process_tokens(t_data *data, bool (*f)(char *str));
-
 // filter_reserved_word.c
 bool filter_reserved_word(char *str);
 bool filter_authorized_word(char *str);
@@ -254,6 +256,18 @@ bool filter_affectation_varname(char *str, char *sign_equal);
 // filter_quotes.c
 bool filter_quotes(char *str);
 bool remove_quotes(char *input, char type_quote);
+
+// filter_concatenate.c
+bool filter_concatenate(t_token *token);
+bool is_space_between_tokens(t_token *token);
+bool merge_token(t_token *dst, t_token *src);
+char *merge_token_str(t_token *dst, t_token *src);
+
+// ------------------ HEREDOC --------------------
+
+// heredoc_utils.c
+char	*find_new_name(char *str);
+char	*get_name_heredoc(char *name);
 
 // ------------------ EXEC --------------------
 

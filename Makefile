@@ -10,13 +10,13 @@ SRC_FILES = off_main.c \
 			syntax/syntax_utils_3.c \
 			filters/filter_affectation.c \
 			filters/filter_reserved_words.c \
+			filters/filter_concatenate.c \
 			filters/filter_main.c \
 			filters/filter_quotes.c \
 			filters/utils.c \
 			lexer/lexer.c \
 			lexer/lexer_token.c \
 			lexer/lexer_utils_1.c \
-			lexer/lexer_utils_2.c \
 			lexer/lexer_print.c \
 			parser/parser.c \
 			parser/parser_tab_exec.c \
@@ -37,6 +37,7 @@ SRC_FILES = off_main.c \
 			free/free_2.c \
 			init/init_data.c \
 			init/init_env.c \
+			utils/utils.c \
 			# builtins/ft_echo.c \
 			# builtins/ft_env.c \
 			# builtins/ft_exit.c \

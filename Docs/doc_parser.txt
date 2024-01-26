@@ -17,6 +17,10 @@ Voir Olivier pour execution (on ne verifie pas les fichiers avant dans le parsin
 mais apres les forks, dans l'exec
 
 --------------------------------------------------------------------------
+voir les test avec echo: valgrind --leak-check=full --show-leak-kinds=all -s ./minishell "bonjour'j'k> n"
+
+"bonjour'j'''k"" > n'k' | echo'je' suis '''heureux'>j"
+--------------------------------------------------------------------------
 j'ai deux facons de faire:
     - soit je manipule les tokens avec les quotes dedans (squote, dquote et multiple squote et dquote)
          - en utilisant une fonction process str, qui va boucler sur les characteres et voir qu'elle fonction appliquer (pointeur de fonctions)

@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 13:08:04 by blax              #+#    #+#             */
-/*   Updated: 2024/01/25 19:27:25 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:44:34 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ bool ft_lexer(t_data *data)
             if (len_str == -1)
                 return (false);
             add_token(data, i, len_str);
+            data->is_space = false;
         }
         data->nb_tokens++;
     }
