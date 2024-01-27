@@ -11,12 +11,7 @@ https://www.youtube.com/watch?v=0ZEX_l0DFK0
 Reinitialiser brave/chrome
 rm -rf ~/.config/google-chrome/Singleton*
 rm -rf ~/.config/BraveSoftware/Brave-Browser/Singleton*
---------------------------------------------------------------------------
 
-Voir Olivier pour execution (on ne verifie pas les fichiers avant dans le parsing)
-mais apres les forks, dans l'exec
-
---------------------------------------------------------------------------
 voir les test avec echo: valgrind --leak-check=full --show-leak-kinds=all -s ./minishell "bonjour'j'k> n"
 
 "bonjour'j'''k"" > n'k' | echo'je' suis '''heureux'>j"
@@ -79,81 +74,13 @@ doc: https://www.gnu.org/software/bash/manual/html_node/Tilde-Expansion.html
 ETAPE 7:
     - aller dans gerer_expand.txt et gerer les cas particulier qui se trouvent a l'interieur
 
---------------------------------------------------------------------------
-cas a gerer pour l'expand
-bash-5.1$ echo $HOME"fdsfgg" -> cas (1) particulier a gerer
-/mnt/nfs/homes/edesaintfdsfgg
-bash-5.1$ echo $HOME "fdsfgg" -> cas (2) classique gerer par echo et fonctionne avec mon lexing
-/mnt/nfs/homes/edesaint fdsfgg
-bash-5.1$ echo $HOME"fds    fgg" -> gerer par le cas (1)
-/mnt/nfs/homes/edesaintfds    fgg
-bash-5.1$ echo $HOME"$HOMEfds    fgg" -> gerer par le cas (1), bien verifier pas d'espaces supplementaires
-/mnt/nfs/homes/edesaint    fgg
-bash-5.1$ echo $HOME'$HOMEfds    fgg' -> pris en compte dans le cas (1)
-/mnt/nfs/homes/edesaint$HOMEfds    fgg
-bash-5.1$ echo $HOME"$HOME fds    fgg" -> gerer par le cas (1)
-/mnt/nfs/homes/edesaint/mnt/nfs/homes/edesaint fds    fgg
-bash-5.1$ echo $HOME"$HOME'fds    fgg" -> gerer par le cas (1)
-/mnt/nfs/homes/edesaint/mnt/nfs/homes/edesaint'fds    fgg
-bash-5.1$ echo $HOME"$HOME|'fds    fgg"
-/mnt/nfs/homes/edesaint/mnt/nfs/homes/edesaint|'fds    fgg
-bash-5.1$ echo $HOME"$HOME>'fds    fgg"
-/mnt/nfs/homes/edesaint/mnt/nfs/homes/edesaint>'fds    fgg
-bash-5.1$ echo $HOME"$HOME<'fds    fgg"
-/mnt/nfs/homes/edesaint/mnt/nfs/homes/edesaint<'fds    fgg
-bash-5.1$ export L=l
-bash-5.1$ $Ls -la
-bash: -la: command not found
-bash-5.1$ $"L"s -la
-bash: Ls: command not found
-bash-5.1$ "$L"s -la
-
---------------------------------------------------------------------------
-cas export doit etre gerer
-
-bash-5.1$ export ^=h
-bash: export: `^=h': not a valid identifier
-bash-5.1$ export $h=h
-bash: export: `=h': not a valid identifier
-bash-5.1$ export $h=bonjour
-bash: export: `=bonjour': not a valid identifier
-bash-5.1$ export $h="bonjour"
-bash: export: `=bonjour': not a valid identifier
-bash-5.1$ 
 ----------------------------------------------------------------------------
 a voir, les noms des fichiers ne sont pas bons
 important: peut etre initialiser data, comme ca on le gere de a a z 
     et on est sur de ne pas avoir de problemes quand on lance plusieurs fois (l'executable minishell/ plusieurs commandes dans l'executable)
     car comme la variable data est dans la stack, il peut garder le pointeur tant que l'executable ./minishell n'est pas terminer
---------------------------------------------------------------------------
-logique execution des process des commandes
-si une seule commande (un node),
- si ce n'est pas un builtin, alors on execute un process enfant
- si builtin dans le process parent
-si plusieurs commandes (plusieurs nodes)
- tout est executer dans les processus enfant
---------------------------------------------------------------------------
-les builtins doivent print une erreur si fail
 
 -------------------------------------------------------------------------
-Si on trouve un de ces tokens on envoie un message d'erreur
-"minishell> reserved word
-(a implementer dans le parser, en verifiant que chaque token->str est different):
-! case coproc do done elif else esac fi for function if in select then until while { } time [[ ]]
-awk
-
-ce cas ci ne fonctionne pas au niveau des redirections:
-./minishell "echo |>ouou "
-A REVOIR
--------------------------------------------------------------------------
-
-cas du sujet:
-exit 5 | exit 6
-echo $?
-
-si tu es dans le dossier
-et que tu supprime le dossier
-il ne faut pas qu'il crash
 
 edesaint@bess-f2r5s4:~/42-cursus/final_minishell$ env -i bash
 edesaint@bess-f2r5s4:/mnt/nfs/homes/edesaint/42-cursus/final_minishell$ env
@@ -164,19 +91,7 @@ _=/usr/bin/env
 env -i (doit tout supprimer ou laisser que quelques info)
 
 ------------------------------------------------------------------------
-On compte le nombre de pipes,
-puis on cree et on ajoute les nodes.
-On obtient ainsi: une liste de noeuds qui correspondent au maillon separer par les pipes.
 
-Cela inclut un parsing quasi parfait pour avoir les bons tokens.
-par exemple si on a: echo bonjour'|' et (ce nest pas le cas ici)
-mais supposons qu'on compte un pipe en trop, il faudras gerer le cas ou on s'est trompe
-pour au moins que ca segfault pas.
-
-Ce cas la ne fonctionne pas: a tester: cat <<< bonjour
-il faut ignorer le <<<
-
------------------------------------------------------------------------
 DISCUSSION ROBIN KERJEAN (le 18 au soir)
 
 modifier la structure redirections
@@ -207,8 +122,3 @@ pour faire cela: reprendre la meme facon de faire que pour exec_tab
  singletone (facon derive de faire une globale avec une variable static)
  variable globale (peut etre modifie de n'importe ou)=> pas secure
  spike
-
---------------------------------------------------------------------------------------
- DISCUSSION avec robin 20 JANVIER
-
- voir mode interactif quand le heredoc, gestion des signals

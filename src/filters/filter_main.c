@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 21:57:05 by edesaint          #+#    #+#             */
-/*   Updated: 2024/01/26 14:28:13 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/27 19:46:05 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ bool pass_on_filters(t_data *data)
         return (false);
     if (!process_tokens(data, &filter_affectation))
         return (false);
-    ft_token_iter_expander(data, &expand_tokens);
+    ft_token_iter_expander(data, &expand_string);
     return (true);
 }

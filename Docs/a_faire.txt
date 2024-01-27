@@ -1,15 +1,14 @@
 
-Will
-- heredoc
 - gestion des signaux
-- gestion des erreurs
-- voir variable d'environnement et path
-- récuper le path pour executer les commandes
-- faire le builtin "cd" + gérer chemin relatif/absolue
-- execution (gérer le multi-pipes)
-- les builtins demandés doivent etre appelé si demandés
-
-Etienne
-- execution (redirection de fichier) -> a implementer quand Will auras terminer sa partie
+    - exit ctrl + D segfault si aucune commande n''as ete rentrer auparavant
+    - voir gestion des signaux dans le heredoc
+    - ctrl + \ segfault
 - vérifier les leaks (bien tout free)
-- faire les tests des builtins, tests avec des erreurs, sans erreurs
+- Mettre en place le tester
+- voir le parsing pour la redirection d'erreur: 2>
+- implementer la redirection d'erreur
+
+Etienne ET Will
+
+- Voir Olivier pour execution (on ne verifie pas les fichiers avant dans le parsing)
+mais apres les forks, dans l'exec

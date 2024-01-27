@@ -31,13 +31,16 @@ SRC_FILES = off_main.c \
 			expander/expander.c \
 			expander/expander_utils_1.c \
 			expander/expander_utils_2.c \
+			heredoc/heredoc.c \
+			heredoc/heredoc_utils.c \
+			utils/utils.c \
+			utils/process.c \
 			trim.c \
 			error.c \
 			free/free.c \
 			free/free_2.c \
 			init/init_data.c \
 			init/init_env.c \
-			utils/utils.c \
 			# builtins/ft_echo.c \
 			# builtins/ft_env.c \
 			# builtins/ft_exit.c \

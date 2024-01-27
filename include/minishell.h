@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:31:10 by blax              #+#    #+#             */
-/*   Updated: 2024/01/26 21:11:55 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/27 22:50:50 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,11 @@ t_data	*init_data(char *str, t_env *env);
 void	ft_token_add_back(t_token **token, t_token *newlist);
 t_token	*ft_token_last(t_token *token);
 void	ft_token_iter(t_data *data, bool (*f)(t_token *));
-bool process_tokens(t_data *data, bool (*f)(char *str));
 void	ft_token_iter_expander(t_data *data, void (*f)(t_env *, char *));
+
+// process.c
+bool process_tokens(t_data *data, bool (*f)(char *str));
+bool process_heredoc(t_data *data, t_node *node);
 
 // ------------------ Lexer --------------------
 // lexer.c
@@ -188,7 +191,6 @@ bool delimit_node(t_data *data, t_token *token);
 bool is_redir_append(t_token *token, char *name);
 bool is_redir_out(t_token *token, char *name);
 bool is_redir_in(t_token *token, char *name);
-// bool is_redir_heredoc(t_token *token, char *name);
 bool update_redir(t_node *node, t_token *token);
 bool init_redir(t_data *data, t_node *node, t_token *token);
 
@@ -221,8 +223,8 @@ void determine_next_token_type(t_state type_token, t_state *cur_state);
 // expander.c
 bool is_expandable(t_token *token);
 // void expand_tokens(t_data *data, t_env *env);
-void expand_tokens(t_env *env, char *str);
-void replaceString(char **original, const char *newString);
+void expand_string(t_env *env, char *str);
+void replace_string(char **original, const char *new_string);
 // char *replace_token_str(char *str, char *new_value);
 // void print_expanded_tokens(t_token *tokens);
 
@@ -266,8 +268,11 @@ char *merge_token_str(t_token *dst, t_token *src);
 // ------------------ HEREDOC --------------------
 
 // heredoc_utils.c
-char	*find_new_name(char *str);
-char	*get_name_heredoc(char *name);
+char	*find_name_heredoc(char *str);
+char	*get_name_heredoc(void);
+bool sub_process_heredoc(t_env *env, t_node *node, char *delimiter);
+bool is_redir_heredoc(t_state ttoken_1, t_state ttoken_2);
+void	get_and_save_heredoc_content(t_env *env, int fd, char *delimiter);
 
 // ------------------ EXEC --------------------
 

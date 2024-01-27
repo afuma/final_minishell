@@ -6,7 +6,7 @@
 #    By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 16:26:14 by wnguyen           #+#    #+#              #
-#    Updated: 2024/01/24 22:05:29 by edesaint         ###   ########.fr        #
+#    Updated: 2024/01/27 23:21:27 by edesaint         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC = \
 	./ft_bzero.c \
 	./ft_memcpy.c \
 	./ft_memmove.c \
+	./ft_strcpy.c \
 	./ft_strlcpy.c \
 	./ft_strlcat.c \
 	./ft_toupper.c \

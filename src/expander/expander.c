@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 23:04:42 by blax              #+#    #+#             */
-/*   Updated: 2024/01/26 12:27:30 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/27 23:24:29 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool is_expandable(t_token *token)
     return (token->type_str == D_QUOTE || token->type_str == S_CHAR);
 }
 
-void expand_tokens(t_env *env, char *str)
+void expand_string(t_env *env, char *str)
 {
     char *str_expand;
 
@@ -36,12 +36,14 @@ void expand_tokens(t_env *env, char *str)
         return ;
     str_expand = expand_variables(env, str);
     if (str_expand)
-        replaceString(&str, str_expand);
+        replace_string(&str, str_expand);
 }
 
-void replaceString(char **original, const char *newString)
+void replace_string(char **original, const char *new_string)
 {
     free(*original);
-    *original = malloc(strlen(newString) + 1);
-    strcpy(*original, newString);
+    *original = malloc(ft_strlen(new_string) + 1);
+    if (!*original)
+        return ;
+    *original = ft_strcpy(*original, new_string);
 }
