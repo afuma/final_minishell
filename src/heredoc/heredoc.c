@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 18:03:00 by edesaint          #+#    #+#             */
-/*   Updated: 2024/01/27 22:57:40 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/28 12:43:52 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,43 @@ bool sub_process_heredoc(t_env *env, t_node *node, char *delimiter)
     return (true);
 }
 
-void	get_and_save_heredoc_content(t_env *env, int fd, char *delimiter)
+bool process_heredoc(t_data *data, t_node *node)
 {
-	char *line;
+    t_token *token;
 
-	line = readline("> ");
-    while (line != NULL && ft_strcmp(line, delimiter) == 0 && errno != EINTR)
-	{
-        expand_string(env, line);
-		write(fd, line, ft_strlen(line));
-        free(line);
-        line = readline("> ");
-        if (!line && errno != EINTR && errno != EBADF)
-			write(STDERR_FILENO, "\n", 1);
-        if (errno == EINTR || errno == EBADF)
+    token = data->token;
+    while (token)
+    {
+		if (token && token->next && in_node(data, token))
 		{
-			free (line);
-			line = NULL;
-			env->lst_exit = 128 + SIGINT;
+			if (is_redir_heredoc(token->type_token, token->next->type_token))
+			{
+				if (!sub_process_heredoc(data->env, node, token->next->str))
+					return (false);
+			}
 		}
-		write(fd, "\n", 1);
+        token = token->next;
     }
+    return (true);
+}
+
+bool fill_heredoc(t_data *data)
+{
+    t_node *node;
+    t_token *token;
+
+    node = data->node;
+    token = data->token;
+    while (node)
+    {
+        token = get_first_token(data, node, token);
+        if (!delimit_node(data, token))
+            return ("erreur");
+        if (!process_heredoc(data, node))
+            return ("erreur");
+        node = node->next;
+    }
+    data->start = 0;
+    data->end = 0;
+    return (true);
 }

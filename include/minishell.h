@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:31:10 by blax              #+#    #+#             */
-/*   Updated: 2024/01/27 22:50:50 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/28 15:14:39 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,15 @@ char *transform_enum_quote(t_stick_token num_c);
 
 // ------------------------- Syntax ---------------------------------
 
+// is_syntax.c
+bool is_syntax_char(char c);
+bool is_syntax_string(char *str);
+bool is_syntax(char c);
+bool is_syntax_redir(char *str);
+
 // syntax_utils_1.c
 bool is_quote(char c);
 bool is_space(char c);
-bool is_syntax_char(char c);
-bool is_syntax(char c);
 bool is_double_symbol(t_data *data, int i, char c);
 
 // syntax_utils_2.c
@@ -80,7 +84,6 @@ void update_is_quote(t_data *data, char letter);
 bool is_closed_quotes(t_data *data);
 
 // syntax_utils_3.c
-bool is_syntax_redir(char *str);
 bool is_begin_by_pipe(t_token *token);
 bool is_end_by_pipe(t_token *token);
 bool check_redir(t_token *token);
@@ -129,10 +132,7 @@ void	ft_token_add_back(t_token **token, t_token *newlist);
 t_token	*ft_token_last(t_token *token);
 void	ft_token_iter(t_data *data, bool (*f)(t_token *));
 void	ft_token_iter_expander(t_data *data, void (*f)(t_env *, char *));
-
-// process.c
 bool process_tokens(t_data *data, bool (*f)(char *str));
-bool process_heredoc(t_data *data, t_node *node);
 
 // ------------------ Lexer --------------------
 // lexer.c
@@ -270,9 +270,13 @@ char *merge_token_str(t_token *dst, t_token *src);
 // heredoc_utils.c
 char	*find_name_heredoc(char *str);
 char	*get_name_heredoc(void);
-bool sub_process_heredoc(t_env *env, t_node *node, char *delimiter);
-bool is_redir_heredoc(t_state ttoken_1, t_state ttoken_2);
 void	get_and_save_heredoc_content(t_env *env, int fd, char *delimiter);
+
+// heredoc.c
+bool fill_heredoc(t_data *data);
+bool sub_process_heredoc(t_env *env, t_node *node, char *delimiter);
+bool process_heredoc(t_data *data, t_node *node);
+bool is_redir_heredoc(t_state ttoken_1, t_state ttoken_2);
 
 // ------------------ EXEC --------------------
 

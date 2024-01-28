@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 22:33:37 by edesaint          #+#    #+#             */
-/*   Updated: 2024/01/26 15:36:17 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/28 14:30:34 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,14 @@ bool filter_concatenate(t_token *token)
     // if (!token || token->id == 0)
     //     return (true);
     while (token && token->next && !is_space_between_tokens(token))
-        merge_token(token, token->next);
+    {
+        if (!is_syntax_string(token->next->str) && \
+            !is_syntax_string(token->str))
+        {
+            merge_token(token, token->next);
+        }
+        token = token->next;
+    }
     return (true);
 }
 

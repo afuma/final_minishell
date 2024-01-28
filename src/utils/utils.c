@@ -6,7 +6,7 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:23:27 by edesaint          #+#    #+#             */
-/*   Updated: 2024/01/27 22:28:53 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/28 12:44:20 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,18 @@ void	ft_token_iter_expander(t_data *data, void (*f)(t_env *, char *))
 			f(tmp_env, token->str);
 		token = token->next;
 	}
+}
+
+bool process_tokens(t_data *data, bool (*f)(char *str))
+{
+    t_token *token;
+
+    token = data->token;
+    while (token)
+    {
+        if (!f(token->str))
+            return (false);
+        token = token->next;
+    }
+    return (true);
 }

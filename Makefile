@@ -4,6 +4,7 @@ OBJ_DIR = obj/
 
 SRC_FILES = off_main.c \
 			transform_enum.c \
+			syntax/is_syntax.c \
 			syntax/syntax.c \
 			syntax/syntax_utils_1.c \
 			syntax/syntax_utils_2.c \
@@ -34,7 +35,6 @@ SRC_FILES = off_main.c \
 			heredoc/heredoc.c \
 			heredoc/heredoc_utils.c \
 			utils/utils.c \
-			utils/process.c \
 			trim.c \
 			error.c \
 			free/free.c \

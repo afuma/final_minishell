@@ -6,19 +6,11 @@
 /*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 22:32:16 by edesaint          #+#    #+#             */
-/*   Updated: 2024/01/22 11:30:02 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/01/28 13:49:19 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-bool is_syntax_redir(char *str)
-{
-    return (ft_strcmp(str, ">") == 0 || \
-        ft_strcmp(str, "<") == 0 || \
-        ft_strcmp(str, ">>") == 0 || \
-        ft_strcmp(str, "<<") == 0);
-}
 
 bool is_begin_by_pipe(t_token *token)
 {
